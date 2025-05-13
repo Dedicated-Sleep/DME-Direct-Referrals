@@ -1,7 +1,10 @@
-import React from 'react';
-import { CheckCircleIcon, ArrowRightIcon } from 'lucide-react';
+
+import React, { useState } from 'react';
+import { CheckCircleIcon, ArrowRightIcon, XIcon } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <div className="relative min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 flex items-center justify-center text-white">
       <div className="absolute inset-0">
@@ -41,18 +44,31 @@ const Hero: React.FC = () => {
             ))}
           </div>
           
-          <a 
-            href="https://form.asana.com/?k=wTpMhH-4QVf3z-rJUpc7ug&d=114317148620698"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Button to open modal */}
+          <button
+            onClick={() => setIsModalOpen(true)}
             className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 fade-in flex items-center gap-2 mx-auto inline-flex"
             style={{ animationDelay: '0.6s' }}
           >
             Join the Network
             <ArrowRightIcon className="h-5 w-5" />
-          </a>
+          </button>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="relative bg-white rounded-xl overflow-hidden w-full max-w-4xl h-[90vh] shadow-xl">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-black"
+            >
+              <XIcon className="w-6 h-6" />
+            </button>
+            <iframe className="asana-embed-iframe" height="100%" width = "100%" src="https://form.asana.com/?k=wTpMhH-4QVf3z-rJUpc7ug&d=114317148620698&embed=true"></iframe>
+          </div>
+        </div>
+      )}      
     </div>
   );
 };
